@@ -3,13 +3,29 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ImageView android:id="@+id/splashscreen" android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:src="@drawable/splash"
-        android:layout_gravity="center"/>
-
-    <TextView android:layout_width="fill_parent"
+    <ImageView
+        android:layout_marginTop="100dp"
+        android:id="@+id/splashscreen"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World, splash"/>
+        android:layout_gravity="center"
+        android:src="@drawable/splash" />
+
+<!--    <ProgressBar-->
+<!--        android:layout_gravity="center"-->
+<!--        android:id="@+id/splash_screen_progress_bar"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"-->
+<!--        android:layout_marginRight="5dp" />-->
+<!--    <TextView-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:text="test"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textColor="@color/cardview_dark_background"-->
+<!--        android:id="@+id/textSplashLoading"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="35dp"/>-->
 
 </LinearLayout>
