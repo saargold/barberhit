@@ -11,10 +11,12 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,18 +24,22 @@ import java.util.List;
 
 public class Feed extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReferenceBarber;
      List<Service> dataSet;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference().child("services");
+        databaseReferenceBarber = firebaseDatabase.getReference("barber");
 
         Intent i = getIntent();
         User userData = (User)i.getSerializableExtra("userData");
         dataSet= new ArrayList<>();
+
         loadData();
 
 
@@ -66,9 +72,12 @@ public class Feed extends AppCompatActivity {
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(layoutManager);
+                mAuth = FirebaseAuth.getInstance();
 
                 CustomAdapter adapter = new CustomAdapter(dataSet);
                 recyclerView.setAdapter(adapter);
+
+
 
             }
 
@@ -78,5 +87,8 @@ public class Feed extends AppCompatActivity {
 
             }
         });
+
+
     }
+
 }

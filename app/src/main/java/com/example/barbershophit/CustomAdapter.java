@@ -3,6 +3,7 @@ package com.example.barbershophit;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewTitle;
         TextView textViewPrice;
         TextView textViewDate;
+        TextView textViewBarberName;
+        TextView textViewBarberLocation;
+        TextView textViewBarberPhone;
 
 
         public MyViewHolder (View itemView )
@@ -34,10 +38,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(itemView);
 
             cardView =  itemView.findViewById(R.id.card_view);
-            textViewTitle =  itemView.findViewById(R.id.textViewNameForCard);
             textViewPrice =  itemView.findViewById(R.id.textViewForPrice);
             textViewDate =  itemView.findViewById(R.id.textViewForDate);
+            textViewTitle =  itemView.findViewById(R.id.textViewTitle);
 
+            textViewBarberName =itemView.findViewById(R.id.textViewNameForCard);
+            textViewBarberLocation=itemView.findViewById(R.id.textViewLocation);
+            textViewBarberPhone=itemView.findViewById(R.id.textViewPhone);
 
 
         }
@@ -58,15 +65,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         TextView textViewName = viewHolder.textViewTitle;
         TextView textViewPrice = viewHolder.textViewPrice;
+        TextView textViewBarberName=viewHolder.textViewBarberName;
+        TextView textViewBarberLocation = viewHolder.textViewBarberLocation;
+        TextView textViewBarberPhone = viewHolder.textViewBarberPhone;
+
         TextView textViewDate = viewHolder.textViewDate;
         CardView cardView = viewHolder.cardView;
+        textViewBarberName.setText(dataSet.get(listPosition).getName());
+        textViewBarberLocation.setText( " address: "+ dataSet.get(listPosition).getAddress());
+        textViewBarberPhone.setText(" phone :"  +dataSet.get(listPosition).getPhone());
         textViewName.setText(dataSet.get(listPosition).getTitle());
         textViewPrice.setText("Price: "+ dataSet.get(listPosition).getPrice()+"");
 
 
 
 
-       // textViewDate.setText(dataSet.get(listPosition).getTime()+"");
 
 
 
@@ -76,6 +89,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public int getItemCount() {
         return dataSet.size();
     }
+
+
 }
 
 

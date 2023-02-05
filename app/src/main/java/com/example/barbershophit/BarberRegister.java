@@ -35,7 +35,6 @@ public class BarberRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_barber_register);
-        Barber barber;
         register = findViewById(R.id.buttonRegisterBarber);
         email = findViewById(R.id.editBarberEmail);
         password = findViewById(R.id.editBarberPassword);
@@ -79,9 +78,9 @@ public class BarberRegister extends AppCompatActivity {
                     }
 
 
-                    private void writeDB(String fEmail, String fPassword, String fFirstname, String fLastName,String phone,String address , String img) {
+                    private void writeDB(String fEmail, String fPassword, String fFirstname, String fLastName, String phone, String address , String img) {
 
-                        Barber barber = new Barber(fEmail,fPassword,fFirstname,fLastName,address,phone,img);
+                        Barber barber = new Barber();
                         databaseReference=firebaseDatabase.getReference("barber").child(mAuth.getUid());
                         databaseReference.setValue(barber);
                         Intent i = new Intent(BarberRegister.this, BarberActivity.class);
