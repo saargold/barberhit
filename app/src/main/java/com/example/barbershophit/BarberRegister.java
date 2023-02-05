@@ -85,7 +85,7 @@ public class BarberRegister extends AppCompatActivity {
                         databaseReference=firebaseDatabase.getReference("barber").child(mAuth.getUid());
                         databaseReference.setValue(barber);
                         Intent i = new Intent(BarberRegister.this, BarberActivity.class);
-                        i.putExtra("barberData", barber);
+                        i.putExtra("baraberData", barber);
                         startActivity(i);
                     }
                 });

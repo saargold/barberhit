@@ -12,6 +12,10 @@ public class Barber implements Serializable {
     private String phone;
     private String img;
 
+
+
+
+
     public Barber(String email, String password, String firstName, String lastName, String address, String phone, String img) {
         this.email = email;
         this.password = password;
