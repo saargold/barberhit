@@ -1,26 +1,42 @@
 package com.example.barbershophit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>  {
+    public interface OnItemClickListener {
+        void onItemClick(Barber item);
+    }
 
-    private List<Service> dataSet;
+    private  List<Service> dataSet;
+    private  List<Barber> barberList;
 
-    public CustomAdapter(List<Service> dataSet) {
+    private  OnItemClickListener  clickListener;
+//
+//    public CustomAdapter(List<Service> dataSet ,OnItemClickListener clickListener )  {
+//
+//        this.dataSet = dataSet;
+//        this.clickListener = clickListener;
+//
+//    }
 
-        this.dataSet = dataSet;
+    public CustomAdapter(List<Barber> barberList ,OnItemClickListener clickListener )  {
+
+        this.barberList = barberList;
+        this.clickListener = clickListener;
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder  {
@@ -46,7 +62,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             textViewBarberLocation=itemView.findViewById(R.id.textViewLocation);
             textViewBarberPhone=itemView.findViewById(R.id.textViewPhone);
 
-
         }
 
     }
@@ -59,7 +74,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         return new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int listPosition) {
 
@@ -71,11 +85,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         TextView textViewDate = viewHolder.textViewDate;
         CardView cardView = viewHolder.cardView;
-        textViewBarberName.setText(dataSet.get(listPosition).getName());
-        textViewBarberLocation.setText( " address: "+ dataSet.get(listPosition).getAddress());
-        textViewBarberPhone.setText(" phone :"  +dataSet.get(listPosition).getPhone());
-        textViewName.setText(dataSet.get(listPosition).getTitle());
-        textViewPrice.setText("Price: "+ dataSet.get(listPosition).getPrice()+"");
+        textViewBarberName.setText(barberList.get(listPosition).getFirstName()+""+barberList.get(listPosition).getLastName());
+        textViewBarberLocation.setText( " address: "+ barberList.get(listPosition).getAddress());
+        textViewBarberPhone.setText(" phone :"  +barberList.get(listPosition).getPhone());
+        int pos = listPosition;
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(barberList.get(pos).toString() +"tostr");
+                clickListener.onItemClick(barberList.get(pos));
+
+            }
+        });
+
 
 
 
@@ -84,11 +106,47 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
     }
+//    @Override
+//    public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int listPosition) {
+//
+//        TextView textViewName = viewHolder.textViewTitle;
+//        TextView textViewPrice = viewHolder.textViewPrice;
+//        TextView textViewBarberName=viewHolder.textViewBarberName;
+//        TextView textViewBarberLocation = viewHolder.textViewBarberLocation;
+//        TextView textViewBarberPhone = viewHolder.textViewBarberPhone;
+//
+//        TextView textViewDate = viewHolder.textViewDate;
+//        CardView cardView = viewHolder.cardView;
+//        textViewBarberName.setText(dataSet.get(listPosition).getName());
+//        textViewBarberLocation.setText( " address: "+ dataSet.get(listPosition).getAddress());
+//        textViewBarberPhone.setText(" phone :"  +dataSet.get(listPosition).getPhone());
+//        textViewName.setText(dataSet.get(listPosition).getTitle());
+//        textViewPrice.setText("Price: "+ dataSet.get(listPosition).getPrice()+"");
+//        int pos = listPosition;
+//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println(dataSet.get(pos).toString() +"tostr");
+//                clickListener.onItemClick(dataSet.get(pos));
+//
+//            }
+//        });
+//
+//
+//
+//
+//
+//
+//
+//
+//    }
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return barberList.size();
     }
+
+
 
 
 }

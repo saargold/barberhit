@@ -62,7 +62,7 @@ public class UserRegister extends AppCompatActivity {
 
                     private void writeDB(String fEmail, String fPassword, String fFirstname, String fLastName) {
 
-                        User user1 = new User(fEmail,fPassword,fFirstname,fLastName);
+                        User user1 = new User(mAuth.getUid(),fEmail,fPassword,fFirstname,fLastName);
                         databaseReference=firebaseDatabase.getReference("users").child(mAuth.getUid());
                         databaseReference.setValue(user1);
                         Intent i = new Intent(UserRegister.this, Feed.class);

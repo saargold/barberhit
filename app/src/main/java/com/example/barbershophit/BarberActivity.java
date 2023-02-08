@@ -1,5 +1,6 @@
 package com.example.barbershophit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -11,7 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,15 +39,8 @@ public class BarberActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         Barber userData = (Barber)i.getSerializableExtra("baraberData");
-        System.out.println(userData.getEmail());
-        System.out.println(userData.getLastName());
-        System.out.println(userData.getFirstName());
-        System.out.println(userData.getLastName());
-        System.out.println(userData.getEmail());
-        System.out.println(userData.getAddress());
-        System.out.println(userData.getImg());
+
         btnAddService=findViewById(R.id.btnAddService);
-        Time t1 = new Time(20,12,12);
 
 
         btnAddService.setOnClickListener(new View.OnClickListener() {
@@ -55,29 +51,82 @@ public class BarberActivity extends AppCompatActivity {
 
             }
 
+
+
             private void addService(Barber userData, Service s1) {
-                HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("id",s1.getId());
-                hashMap.put("name", userData.getFirstName());
-                hashMap.put("phone", userData.getPhone());
-                hashMap.put("address", userData.getAddress());
-                hashMap.put("title",s1.getTitle());
-                hashMap.put("price",s1.getPrice());
-                hashMap.put("time","time");
-                hashMap.put("place",s1.isPlace());
-                databaseReference=firebaseDatabase.getReference("services");
+//                databaseReference=firebaseDatabase.getReference("services").child(s1.getuId());
+//                System.out.println(s1.getuId()+"saasar");
+//                HashMap<String,Object> hashMap = new HashMap<>();
+//                hashMap.put("serviceId",s1.getuId());
+//                hashMap.put("barberId",userData.getId());
+//                hashMap.put("name", userData.getFirstName());
+//                hashMap.put("phone", userData.getPhone());
+//                hashMap.put("address", userData.getAddress());
+//                hashMap.put("title",s1.getTitle());
+//                hashMap.put("price",s1.getPrice());
+//                hashMap.put("time","time");
+//                hashMap.put("status","Not");
 
-                databaseReference.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                databaseReference=firebaseDatabase.getReference("barber").child(mAuth.getUid()).child("services");
+//                databaseReference.child(s1.getuId()).setValue(s1).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        Toast.makeText(BarberActivity.this,"publish work",Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
 
-                    //                databaseReference.child(mAuth.getUid()).push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+               // Service s2 = new Service(s1.getuId(),userData.getFirstName(),userData.getPhone(),userData.getAddress(),s1.getTitle(),s1.getPrice(),"Not");
+
+                Service s2 = new Service(s1.getuId(),s1.getTitle(),s1.getPrice(),"Not",mAuth.getCurrentUser().getUid(),"null");
+                databaseReference=firebaseDatabase.getReference("services").child(s2.getuId());
+
+                databaseReference.setValue(s2).addOnSuccessListener(new OnSuccessListener<Void>() {
+
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(BarberActivity.this,"publish",Toast.LENGTH_LONG).show();
 
+                        databaseReference=firebaseDatabase.getReference("barber").child(mAuth.getUid());
+                        databaseReference.child("servicesList").child(s2.getuId()).setValue(s2);
+
+
+
                     }
                 });
 
+
+
+
+
+
             }
+
+//            private void addService(Barber userData, Service s1) {
+//                HashMap<String,Object> hashMap = new HashMap<>();
+//                s1.setId(String.valueOf(View.generateViewId()));
+//                hashMap.put("serviceId",s1.getId());
+//                hashMap.put("barberId",userData.getId());
+//                hashMap.put("name", userData.getFirstName());
+//                hashMap.put("phone", userData.getPhone());
+//                hashMap.put("address", userData.getAddress());
+//                hashMap.put("title",s1.getTitle());
+//                hashMap.put("price",s1.getPrice());
+//                hashMap.put("time","time");
+//                hashMap.put("status","Not");
+//                databaseReference=firebaseDatabase.getReference("services");
+//                databaseReference.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(BarberActivity.this,"publish",Toast.LENGTH_LONG).show();
+//
+//
+//
+//                    }
+//                });
+//
+//            }
 
             private void showCustomDialog(Barber userData) {
                 final Dialog dialog = new Dialog(BarberActivity.this);
@@ -105,11 +154,10 @@ public class BarberActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String name = nameEt.getText().toString();
                         int age = Integer.parseInt(ageEt.getText().toString());
-
-
-
-                        Service s1 = new Service(mAuth.getUid(),name,age ,false);
-
+                        String id = (String.valueOf(View.generateViewId()));
+                        System.out.println(mAuth.getCurrentUser().getUid()+"uid");
+                        String testi=mAuth.getCurrentUser().getUid();
+                        Service s1 = new Service(id,name,age ,"Not",testi, "null");
 
                         addService(userData,s1);
 

@@ -137,7 +137,7 @@ Boolean isBarber =false;
                                                     String email = String.valueOf(snapshot.child("email").getValue());
                                                     String password = String.valueOf(snapshot.child("password").getValue());
 
-                                                    User user1=new User(email,password,fName,lName);
+                                                    User user1=new User(mAuth.getUid(),email,password,fName,lName);
                                                     Intent i = new Intent(MainActivity.this, Feed.class);
                                                     i.putExtra("userData", user1);
                                                     startActivity(i);

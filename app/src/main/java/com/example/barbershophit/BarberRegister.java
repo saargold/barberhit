@@ -80,7 +80,7 @@ public class BarberRegister extends AppCompatActivity {
 
                     private void writeDB(String fEmail, String fPassword, String fFirstname, String fLastName, String phone, String address , String img) {
 
-                        Barber barber = new Barber();
+                        Barber barber = new Barber(mAuth.getUid(),fEmail,fPassword,fFirstname,fLastName,address,phone,img);
                         databaseReference=firebaseDatabase.getReference("barber").child(mAuth.getUid());
                         databaseReference.setValue(barber);
                         Intent i = new Intent(BarberRegister.this, BarberActivity.class);

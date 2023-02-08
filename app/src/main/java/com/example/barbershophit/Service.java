@@ -1,34 +1,31 @@
 package com.example.barbershophit;
 
-import com.google.firebase.database.Exclude;
-
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Service implements Serializable  {
-    private String id;
+    private String uId;
     private String name;
     private String phone;
     private String address;
     private String title;
     private int price;
-    private boolean place =false;
+    private String status;
+    private String barberId;
+    private String userId;
+
+
 
     public  Service(){
 
     }
 
-    public Service(String id, String name, String phone, String address, String title, int price, boolean place) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.title = title;
-        this.price = price;
-        this.place = place;
+
+
+    public void setStatus(String status) {
+        this.status = status;
     }
+
 
     public String getName() {
         return name;
@@ -54,26 +51,49 @@ public class Service implements Serializable  {
         this.address = address;
     }
 
-    public Service(String id, String title, int price, boolean place) {
-        this.id = id;
+    public String getBarberId() {
+        return barberId;
+    }
+
+    public void setBarberId(String barberId) {
+        this.barberId = barberId;
+    }
+
+    public Service(String uId, String name, String phone, String address, String title, int price, String status, String barberId) {
+        this.uId = uId;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
         this.title = title;
         this.price = price;
-        this.place = place;
+        this.status = status;
+        this.barberId = barberId;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Service(String title, int price, Time time, boolean place) {
+    public Service(String uId, String title, int price, String status) {
+        this.uId = uId;
         this.title = title;
         this.price = price;
-        this.place = place;
+        this.status = status;
     }
+
+    public Service(String uId, String title, int price, String status,String barberId,String userId) {
+        this.uId = uId;
+        this.title = title;
+        this.price = price;
+        this.status = status;
+        this.barberId=barberId;
+        this.userId=userId;
+    }
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -91,26 +111,27 @@ public class Service implements Serializable  {
         this.price = price;
     }
 
-
-
-    public boolean isPlace() {
-        return place;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPlace(boolean place) {
-        this.place = place;
+
+    public String getUserId() {
+        return userId;
     }
-//    @Exclude
-//    public Map<String, Object> toMap() {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("id", id);
-//        result.put("name", name);
-//        result.put("phone", phone);
-//        result.put("address", address);
-//        result.put("title", title);
-//        result.put("price", price);
-//        result.put("place", place);
-//
-//        return result;
-//    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "uId='" + uId + '\'' +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+
+                '}';
+    }
 }

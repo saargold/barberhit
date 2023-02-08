@@ -9,16 +9,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="125dp"
+        android:background="#D3D3D3"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
 
 
 
@@ -26,17 +22,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
+
                 <TextView
+                    android:textSize="24sp"
+                    android:layout_marginTop="5dp"
                     android:textStyle="bold"
-                    android:id="@+id/textViewNameForCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="Android Name"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    android:gravity="left"
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    tools:text="text" />
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
@@ -45,33 +44,28 @@
                     android:orientation="horizontal">
 
                     <TextView
-
-                        android:id="@+id/textViewPhone"
+                        android:textSize="20sp"
+                        android:id="@+id/textViewForPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
                         android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:textSize="22sp"
+                        android:layout_gravity="left"
 
-                        tools:text="text" />
+                        android:text="TextView" />
 
                     <TextView
-                        android:id="@+id/textViewLocation"
+                        android:textSize="20sp"
+                        android:layout_gravity="right"
+                        android:id="@+id/textViewForDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="20sp"
-
                         android:text="TextView"
                         tools:text="text" />
+
+
                 </LinearLayout>
 
-
-
-
-
-            </LinearLayout>
 
 
 
