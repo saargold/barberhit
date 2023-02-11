@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ProfileFragment">
+    tools:context=".Fragment.ProfileFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text=" היסטוריית תורים"
+        android:text="@string/ordersListsUser"
         android:textSize="28sp" />
 
     <!-- TODO: Update blank fragment layout -->

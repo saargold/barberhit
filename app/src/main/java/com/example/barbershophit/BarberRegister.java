@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Pattern;
+
 public class BarberRegister extends AppCompatActivity {
      Button register,chooseImg;
      EditText email, firstName, lastName, password,phone,address;
@@ -64,6 +66,8 @@ public class BarberRegister extends AppCompatActivity {
                 String fPhone = phone.getText().toString().trim();
                 String fAddress = address.getText().toString().trim();
                 String fImg= IVPreviewImage.getResources().toString();
+
+
                 mAuth.createUserWithEmailAndPassword(fEmail,fPassword).addOnCompleteListener(BarberRegister.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -91,6 +95,8 @@ public class BarberRegister extends AppCompatActivity {
 
 
             }
+
+
         });
 
     }

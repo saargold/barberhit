@@ -1,17 +1,24 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Fragment;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barbershophit.Adapter.CustomAdapterService;
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
+import com.example.barbershophit.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +45,7 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference,databaseReferenceBarber;
     List<Service> dataSet;
-
+    String idBar;
     private FirebaseAuth mAuth;
     static User user;
     public ServiceFragment() {
@@ -48,11 +55,10 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
 
 
     // TODO: Rename and change types and number of parameters
-    public static ServiceFragment newInstance(User userData) {
+    public static ServiceFragment newInstance(String id) {
         ServiceFragment fragment = new ServiceFragment();
         Bundle args = new Bundle();
-
-
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -74,6 +80,9 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
         // Inflate the layout for this fragment
         Intent i = getActivity().getIntent();
         user = (User) i.getSerializableExtra("userData");
+        String idBarber = getArguments().getString("YourKey");
+        System.out.println(idBarber+"keyyy");
+        idBar=idBarber;
 
         View view =inflater.inflate(R.layout.fragment_services, container, false);
         dataSet= new ArrayList<>();
@@ -94,7 +103,7 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
                     System.out.println(service.toString());
 
 
-                    if(service.getStatus().equals("Not")){
+                    if(service.getStatus().equals("Not") && service.getBarberId().equals(idBar)){
                         dataSet.add(service);
 
                     }
@@ -157,6 +166,7 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
 
         System.out.println(user.getServiceList()+"serre");
 
+        Toast.makeText(getActivity().getApplicationContext(),"Your order has been confirmed",Toast.LENGTH_LONG).show();
 
 
 
@@ -173,7 +183,23 @@ public class ServiceFragment extends Fragment implements CustomAdapterService.On
         databaseReference=firebaseDatabase.getReference("barber").child(dataSet.getBarberId()).child("servicesList").child(testId);
         databaseReference.child("userId").setValue(dataSet.getUserId());
     }
+//    @Override
+//    public void onBackPressed() {
+//        Log.d("CDA", "onBackPressed Called");
+//        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+//        setIntent.addCategory(Intent.CATEGORY_HOME);
+//        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(setIntent);
+//    }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 }

@@ -1,7 +1,5 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.ValueEventListener;
+import com.example.barbershophit.Barber;
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         CardView cardView;
         TextView textViewTitle;
         TextView textViewPrice;
-        TextView textViewDate;
+//        TextView textViewDate;
         TextView textViewBarberName;
         TextView textViewBarberLocation;
         TextView textViewBarberPhone;
@@ -55,7 +55,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             cardView =  itemView.findViewById(R.id.card_view);
             textViewPrice =  itemView.findViewById(R.id.textViewForPrice);
-            textViewDate =  itemView.findViewById(R.id.textViewForDate);
             textViewTitle =  itemView.findViewById(R.id.textViewTitle);
 
             textViewBarberName =itemView.findViewById(R.id.textViewNameForCard);
@@ -83,7 +82,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewBarberLocation = viewHolder.textViewBarberLocation;
         TextView textViewBarberPhone = viewHolder.textViewBarberPhone;
 
-        TextView textViewDate = viewHolder.textViewDate;
+//        TextView textViewDate = viewHolder.textViewDate;
         CardView cardView = viewHolder.cardView;
         textViewBarberName.setText(barberList.get(listPosition).getFirstName()+""+barberList.get(listPosition).getLastName());
         textViewBarberLocation.setText( " address: "+ barberList.get(listPosition).getAddress());

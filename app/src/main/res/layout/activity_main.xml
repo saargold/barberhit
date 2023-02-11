@@ -5,57 +5,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="105dp"
-
     tools:context=".MainActivity">
 
+    <TextView
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titleMain"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="10dp"
+        android:text="@string/Connect" />
     <EditText
+        android:layout_margin="4dp"
+
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Email"
+        android:textDirection="rtl"
+        android:hint="@string/insertEmail"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
         android:inputType="textEmailAddress"
         android:minHeight="48dp" />
 
     <EditText
+        android:layout_margin="4dp"
+
+        android:textDirection="rtl"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
+        android:hint="@string/insertPassword"
         android:minHeight="48dp" />
+
     <CheckBox
-        android:checked="false"
+        android:layout_margin="4dp"
+
         android:id="@+id/checkBarber"
-        android:text="Im Barber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="checkbox_clicked"/>
+        android:checked="false"
+        android:layout_gravity="right"
+        android:minWidth="32dp"
+        android:minHeight="48dp"
+        android:onClick="checkbox_clicked"
+        android:text="@string/ImBarber" />
 
     <Button
         android:id="@+id/btnConnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect" />
+        android:background="@color/purple_200"
+        android:textSize="20sp"
+        android:text="@string/regularConnect"
+        android:textColor="#5E35B1"
+        android:textStyle="bold" />
     <Button
+        android:background="#8657c5"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
         android:visibility="invisible"
         android:id="@+id/btnConnectBarber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect Barber" />
+        android:text="@string/Connect_Barber" />
     <TextView
+        android:layout_marginTop="10dp"
+
         android:textSize="25dp"
-        android:layout_marginTop="100dp"
         android:id="@+id/textView"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="@string/registerTitle" />
 
     <LinearLayout
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="55dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -68,7 +103,9 @@
             android:id="@+id/btnGoToRegisterUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New User" />
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:text="@string/regulerUser" />
 
         <Button
             android:layout_marginLeft="5dp"
@@ -78,7 +115,9 @@
             android:id="@+id/registerBarber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Barber" />
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:text="@string/resiterBarber" />
     </LinearLayout>
 
 

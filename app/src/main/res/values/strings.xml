@@ -5,4 +5,31 @@
     <string name="green">green</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="insertEmail">הכנס אימייל</string>
+    <string name="insertPassword">הכנס סיסמא</string>
+    <string name="ImBarber">אני ספר</string>
+    <string name="regularConnect">התחבר</string>
+    <string name="Connect_Barber">התחבר כספר</string>
+    <string name="registerTitle">הרשמה</string>
+    <string name="regulerUser">הרשמה משתמש רגיל</string>
+    <string name="resiterBarber">הרשמה כספר</string>
+    <string name="Connect">התחבות</string>
+    <string name="barbersLists">רשימת מספרות</string>
+    <string name="ordersListsUser">היסטוריית תורים</string>
+    <string name="avilableServices">תורים זמינים</string>
+    <string name="addService">הוסף תור</string>
+    <string name="enter_title">"הזן כותרת "</string>
+    <string name="insertPrice">הזן מחיר</string>
+    <string name="titleAddNew">הוסף תור חדש</string>
+    <string name="barberFirstName">שם פרטי</string>
+    <string name="barberLastName">שם משפחה</string>
+    <string name="insertPhone">הזן מספר פלאפון</string>
+    <string name="insertAdress">הזן כתובת</string>
+    <string name="chooseImage">בחר תמונה</string>
+    <string name="orders">הזמנות עבר</string>
+    <string name="listsservices">רשימת תורים</string>
+    <string name="avilableServicesList">הזמנות פתוחות</string>
+    <string name="notAvilableServicesList">הזמנות סגורות</string>
+    <string name="AddText">הוסף תור חדש</string>
+    <string name="yourinvitewith">פגישתך עם</string>
 </resources>

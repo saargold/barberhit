@@ -7,18 +7,19 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:background="#D3D3D3"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:foregroundGravity="center"
         android:layout_gravity="center"
         app:cardUseCompatPadding="true">
 
 
         <LinearLayout
+            android:background="#808080	"
+            android:gravity="center"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,17 +31,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
                 android:text="TextView" />
 
             <TextView
+                android:textColor="@color/white"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/textViewForPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
 
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                />
 
 
         </LinearLayout>

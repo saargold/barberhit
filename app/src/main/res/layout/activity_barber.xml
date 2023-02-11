@@ -4,12 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BarberActivity">
 
-    <Button
-        android:id="@+id/btnAddService"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBarberMyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#79a83a"
+            android:text="@string/avilableServicesList"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/btnBarberMyListFinished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff9f1d"
+            android:text="@string/notAvilableServicesList"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.barbershophit.Fragment.BarberListFragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textStyle="bold"
+            android:text="@string/AddText"
+            android:textColor="@color/white"
+            android:background="#8657c5"
+            android:id="@+id/floatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            :visibility="visible" />
+    </LinearLayout>
+
+
 </LinearLayout>

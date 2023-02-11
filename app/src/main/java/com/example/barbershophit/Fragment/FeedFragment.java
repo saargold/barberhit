@@ -1,10 +1,11 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Fragment;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.barbershophit.Barber;
+import com.example.barbershophit.Adapter.CustomAdapter;
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
+import com.example.barbershophit.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +37,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FeedFragment extends Fragment implements CustomAdapter.OnItemClickListener {
-    private static final String USER_ID = "userid";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,7 +73,6 @@ public class FeedFragment extends Fragment implements CustomAdapter.OnItemClickL
         firebaseDatabase = FirebaseDatabase.getInstance();
          databaseReference=firebaseDatabase.getReference().child("services");
         databaseReferenceBarber=firebaseDatabase.getReference().child("barber");
-        //databaseReference=firebaseDatabase.getReference().child("barber").child("services");
 
     }
 
@@ -140,7 +144,6 @@ public class FeedFragment extends Fragment implements CustomAdapter.OnItemClickL
                         dataSet.add(service);
 
                     }
-                  //  initRecycleView(view,dataSet);
 
 
                 }
@@ -148,18 +151,7 @@ public class FeedFragment extends Fragment implements CustomAdapter.OnItemClickL
 
             }
 
-//            private void initRecycleView(View view1,List<Service> dataSet) {
-//                RecyclerView recyclerView = view1.findViewById(R.id.recyclerView1);
-//                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//                recyclerView.setLayoutManager(layoutManager);
-//                mAuth = FirebaseAuth.getInstance();
-//
-//                CustomAdapter adapter = new CustomAdapter(dataSet,FeedFragment.this);
-//                recyclerView.setAdapter(adapter);
-//
-//
-//
-//            }
+
 
 
             @Override
@@ -223,14 +215,25 @@ public class FeedFragment extends Fragment implements CustomAdapter.OnItemClickL
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("YourKey", item.getId());
+        fragment.setArguments(args);
 
-        // Fragment fragment = ServiceFragment.newInstance(dataModel.getDescription(), dataModel.getImage());
-//        Fragment fragment =  ServiceFragment.newInstance(user);
         fragmentTransaction.add(R.id.fragmentContainerView, fragment);
         fragmentTransaction.replace(R.id.fragmentContainerView,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }

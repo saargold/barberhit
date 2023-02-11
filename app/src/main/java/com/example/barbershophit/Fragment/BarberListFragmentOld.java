@@ -1,17 +1,31 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
+import com.example.barbershophit.Adapter.CustomAdapterOrders;
+import com.example.barbershophit.Adapter.CustomAdapterOrdersBarber;
+import com.example.barbershophit.Barber;
+import com.example.barbershophit.BarberActivity;
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
+import com.example.barbershophit.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,34 +38,30 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link BarberListFragmentOld#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment  implements CustomAdapterOrders.OnItemClickListener{
+public class BarberListFragmentOld extends Fragment  implements CustomAdapterOrdersBarber.OnItemClickListener {
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference,databaseReference2,databaseReference3,userRef,userRefList,mDatabase;
+    DatabaseReference databaseReference,databaseReference2,databaseReference3,userRef,userRefList,mDatabase,userRefList1;
     private FirebaseAuth mAuth;
     List<Service> dataSet;
     List<String> userIdList;
-    TextView title1,price1;
-    static User user;
-
+    static Barber barber;
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
     // TODO: Rename and change types of parameters
 
-
-    public ProfileFragment() {
+    public BarberListFragmentOld() {
         // Required empty public constructor
     }
 
-
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(User userData) {
-
-        ProfileFragment fragment = new ProfileFragment();
+    public static BarberListFragmentOld newInstance( ) {
+        BarberListFragmentOld fragment = new BarberListFragmentOld();
         Bundle args = new Bundle();
+
         return fragment;
     }
 
@@ -66,8 +76,8 @@ public class ProfileFragment extends Fragment  implements CustomAdapterOrders.On
         databaseReference=firebaseDatabase.getReference().child("users").child("servicesList");
         System.out.println(mAuth.getCurrentUser().getUid()+"iidd");
         databaseReference3=firebaseDatabase.getReference().child("users").child(mAuth.getCurrentUser().getUid());
-        userRef = mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("servicesList").getRef();
-        userRefList = mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).getRef();
+        userRef = mDatabase.child("barber").child(mAuth.getCurrentUser().getUid()).getRef();
+        userRefList = mDatabase.child("barber").child(mAuth.getCurrentUser().getUid()).child("servicesList").getRef();
 
 
         dataSet= new ArrayList<>();
@@ -77,28 +87,28 @@ public class ProfileFragment extends Fragment  implements CustomAdapterOrders.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         Intent i = getActivity().getIntent();
-        user = (User) i.getSerializableExtra("userData");
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        barber = (Barber) i.getSerializableExtra("baraberData");
+        dataSet= new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
+
+        View view = inflater.inflate(R.layout.fragment_barber_list_old, container, false);
 
         loadDataListServices(view);
-
-
-
-
-
+        System.out.println("");
         return view;
-
     }
 
     private void loadDataListServices(View view) {
-        userRefList.child("servicesList").addValueEventListener(new ValueEventListener() {
+        userRef.child("servicesList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot==null)return;
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     userIdList.add(snapshot.getKey());
+                }
+                for (int i=0;i<userIdList.size();i++){
+                    System.out.println(userIdList.get(i)+"the key");
                 }
                 loadData(view);
 
@@ -116,43 +126,56 @@ public class ProfileFragment extends Fragment  implements CustomAdapterOrders.On
     private void loadData(View view) {
         dataSet.clear();
         for (int i=0;i<userIdList.size();i++){
+            System.out.println(i+"index");
+            System.out.println(userIdList.get(i)+"thek");
 
-            userRef.child(userIdList.get(i)).addListenerForSingleValueEvent(
-                    new ValueEventListener () {
+            userRefList.child(userIdList.get(i)).addListenerForSingleValueEvent(
+
+            new ValueEventListener () {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Service user = dataSnapshot.getValue(Service.class);
-                            dataSet.add(user);
-                            System.out.println(dataSet.size()+"sssarr");
+                            Service service = dataSnapshot.getValue(Service.class);
+                            if(service.getStatus().equals("YES")){
+                                dataSet.add(service);
+
+                            }
+
                             initRecycleView(view,dataSet);
 
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            // Getting Post failed, log a message
                         }
                     });
         }
     }
 
+    private void initRecycleView(View view, List<Service> dataSet) {
 
-    private void initRecycleView(View view1,List<Service> dataSet) {
-        RecyclerView recyclerView = view1.findViewById(R.id.recyclerView2);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView5);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
-        CustomAdapterOrders adapter = new CustomAdapterOrders(dataSet,ProfileFragment.this);
+        CustomAdapterOrdersBarber adapter = new CustomAdapterOrdersBarber(dataSet,BarberListFragmentOld.this);
         recyclerView.setAdapter(adapter);
-
-
-
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 
     @Override
     public void onItemClick(Service item) {
 
-    }
 }
 
+
+    }

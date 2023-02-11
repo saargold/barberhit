@@ -1,4 +1,4 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barbershophit.Barber;
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
+
 import java.util.List;
 
 public class CustomAdapterService extends RecyclerView.Adapter<CustomAdapterService.MyViewHolder>  {
     public interface OnItemClickListener {
         void onItemClick(Service item);
+
+
     }
 
     private  List<Service> dataSet;

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
-    android:layout_margin="16dp"
+    android:layout_height="match_parent"
+    android:layout_margin="14dp"
     android:orientation="vertical">
     <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="Add Service"
+        android:text="@string/titleAddNew"
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:layout_marginTop="50dp"
 
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:imeOptions="actionNext"
-        android:hint="enter title"
+        android:hint="@string/enter_title"
         android:id="@+id/name_et"/>
 
     <EditText
         android:layout_marginTop="50dp"
-
-        android:hint="enter price"
+        android:hint="@string/insertPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
@@ -33,11 +34,14 @@
 
 
     <Button
-        android:layout_marginTop="50dp"
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="add" />
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:background="@color/green"
+        android:text="@string/addService"
+        android:textColor="@color/white" />
 
 </LinearLayout>

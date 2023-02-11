@@ -1,4 +1,4 @@
-package com.example.barbershophit;
+package com.example.barbershophit.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barbershophit.R;
+import com.example.barbershophit.Service;
+
 import java.util.List;
 
-public class CustomAdapterOrders extends RecyclerView.Adapter<CustomAdapterOrders.MyViewHolder>  {
+public class CustomAdapterOrdersBarber extends RecyclerView.Adapter<CustomAdapterOrdersBarber.MyViewHolder>  {
     public interface OnItemClickListener {
         void onItemClick(Service item);
     }
@@ -19,7 +22,7 @@ public class CustomAdapterOrders extends RecyclerView.Adapter<CustomAdapterOrder
     private  List<Service> dataSet;
     private  OnItemClickListener  clickListener;
 
-    public CustomAdapterOrders(List<Service> dataSet , OnItemClickListener clickListener )  {
+    public CustomAdapterOrdersBarber(List<Service> dataSet , OnItemClickListener clickListener )  {
 
         this.dataSet = dataSet;
         this.clickListener = clickListener;
@@ -53,7 +56,7 @@ public class CustomAdapterOrders extends RecyclerView.Adapter<CustomAdapterOrder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(parent.getContext() ).inflate(R.layout.cards_orders_layout , parent ,false);
+        View view = LayoutInflater.from(parent.getContext() ).inflate(R.layout.cards_orders_notabilable_layout , parent ,false);
 
         return new MyViewHolder(view);
     }

@@ -1,27 +1,19 @@
 package com.example.barbershophit;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 
+import com.example.barbershophit.Fragment.FeedFragment;
+import com.example.barbershophit.Fragment.ProfileFragment;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Feed extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
@@ -50,9 +42,7 @@ public class Feed extends AppCompatActivity {
                 Intent i = getIntent();
                 userData = (User)i.getSerializableExtra("userData");
                 i.putExtra("userData",userData);
-//                Fragment fragment = FeedFragment.newInstance(userData);
                 Fragment fragment = new FeedFragment();
-
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView,fragment,"FeedFragment")
                         .addToBackStack("FeedFragment")
@@ -67,7 +57,6 @@ public class Feed extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = getIntent();
                 userData = (User)i.getSerializableExtra("userData");
-//                Fragment fragment = ProfileFragment.newInstance(userData);
                 Fragment fragment = new ProfileFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView,fragment,"ProfileFragment")
@@ -76,7 +65,6 @@ public class Feed extends AppCompatActivity {
             }
         });
 
-        //loadData();
 
 
 
